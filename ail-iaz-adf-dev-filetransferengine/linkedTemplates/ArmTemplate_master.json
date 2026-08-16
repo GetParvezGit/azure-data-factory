@@ -7,6 +7,30 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ail-iaz-adf-dev-filetransferengine"
 		},
+		"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().ServiceEndPoint}"
+		},
+		"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "@{linkedService().TenantID}"
+		},
+		"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "@{linkedService().ServicePrincipalID}"
+		},
+		"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "@{linkedService().ServiceEndPoint}"
+		},
+		"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "@{linkedService().TenantID}"
+		},
+		"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "@{linkedService().ServicePrincipalID}"
+		},
 		"LS_KeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ail-iaz-kv-dev-fte.vault.azure.net/"
@@ -19,11 +43,35 @@
 			"type": "string",
 			"defaultValue": "@{linkedService().DestinationUserName}"
 		},
+		"LS_SFTPDestinationSSHKey_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "@{linkedService().DestinationIPAddress}"
+		},
+		"LS_SFTPDestinationSSHKey_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().DestinationUserName}"
+		},
 		"LS_SFTPSource_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "@{linkedService().SourceIPAddress}"
 		},
 		"LS_SFTPSource_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceUserName}"
+		},
+		"LS_SFTPSourceMultiFactorAuth_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceIPAddress}"
+		},
+		"LS_SFTPSourceMultiFactorAuth_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceUserName}"
+		},
+		"LS_SFTPSourceSSHKey_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceIPAddress}"
+		},
+		"LS_SFTPSourceSSHKey_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "@{linkedService().SourceUserName}"
 		},
@@ -57,17 +105,53 @@
 					"LS_KeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('LS_KeyVault_properties_typeProperties_baseUrl')]"
 					},
+					"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_url": {
+						"value": "[parameters('LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_url')]"
+					},
+					"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_tenant": {
+						"value": "[parameters('LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_tenant')]"
+					},
+					"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId')]"
+					},
+					"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_serviceEndpoint')]"
+					},
+					"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_tenant": {
+						"value": "[parameters('LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_tenant')]"
+					},
+					"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId')]"
+					},
 					"LS_SFTPDestination_properties_typeProperties_host": {
 						"value": "[parameters('LS_SFTPDestination_properties_typeProperties_host')]"
 					},
 					"LS_SFTPDestination_properties_typeProperties_userName": {
 						"value": "[parameters('LS_SFTPDestination_properties_typeProperties_userName')]"
 					},
+					"LS_SFTPDestinationSSHKey_properties_typeProperties_host": {
+						"value": "[parameters('LS_SFTPDestinationSSHKey_properties_typeProperties_host')]"
+					},
+					"LS_SFTPDestinationSSHKey_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SFTPDestinationSSHKey_properties_typeProperties_userName')]"
+					},
 					"LS_SFTPSource_properties_typeProperties_host": {
 						"value": "[parameters('LS_SFTPSource_properties_typeProperties_host')]"
 					},
 					"LS_SFTPSource_properties_typeProperties_userName": {
 						"value": "[parameters('LS_SFTPSource_properties_typeProperties_userName')]"
+					},
+					"LS_SFTPSourceMultiFactorAuth_properties_typeProperties_host": {
+						"value": "[parameters('LS_SFTPSourceMultiFactorAuth_properties_typeProperties_host')]"
+					},
+					"LS_SFTPSourceMultiFactorAuth_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SFTPSourceMultiFactorAuth_properties_typeProperties_userName')]"
+					},
+					"LS_SFTPSourceSSHKey_properties_typeProperties_host": {
+						"value": "[parameters('LS_SFTPSourceSSHKey_properties_typeProperties_host')]"
+					},
+					"LS_SFTPSourceSSHKey_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SFTPSourceSSHKey_properties_typeProperties_userName')]"
 					}
 				}
 			},

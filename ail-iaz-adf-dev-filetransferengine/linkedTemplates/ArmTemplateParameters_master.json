@@ -5,6 +5,24 @@
 		"factoryName": {
 			"value": "ail-iaz-adf-dev-filetransferengine"
 		},
+		"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_url": {
+			"value": "@{linkedService().ServiceEndPoint}"
+		},
+		"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_tenant": {
+			"value": "@{linkedService().TenantID}"
+		},
+		"LS_AzureDataLakeStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId": {
+			"value": "@{linkedService().ServicePrincipalID}"
+		},
+		"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_serviceEndpoint": {
+			"value": "@{linkedService().ServiceEndPoint}"
+		},
+		"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_tenant": {
+			"value": "@{linkedService().TenantID}"
+		},
+		"LS_BlobStorage_ServicePrincipalAuth_properties_typeProperties_servicePrincipalId": {
+			"value": "@{linkedService().ServicePrincipalID}"
+		},
 		"LS_KeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://ail-iaz-kv-dev-fte.vault.azure.net/"
 		},
@@ -14,10 +32,28 @@
 		"LS_SFTPDestination_properties_typeProperties_userName": {
 			"value": "@{linkedService().DestinationUserName}"
 		},
+		"LS_SFTPDestinationSSHKey_properties_typeProperties_host": {
+			"value": "@{linkedService().DestinationIPAddress}"
+		},
+		"LS_SFTPDestinationSSHKey_properties_typeProperties_userName": {
+			"value": "@{linkedService().DestinationUserName}"
+		},
 		"LS_SFTPSource_properties_typeProperties_host": {
 			"value": "@{linkedService().SourceIPAddress}"
 		},
 		"LS_SFTPSource_properties_typeProperties_userName": {
+			"value": "@{linkedService().SourceUserName}"
+		},
+		"LS_SFTPSourceMultiFactorAuth_properties_typeProperties_host": {
+			"value": "@{linkedService().SourceIPAddress}"
+		},
+		"LS_SFTPSourceMultiFactorAuth_properties_typeProperties_userName": {
+			"value": "@{linkedService().SourceUserName}"
+		},
+		"LS_SFTPSourceSSHKey_properties_typeProperties_host": {
+			"value": "@{linkedService().SourceIPAddress}"
+		},
+		"LS_SFTPSourceSSHKey_properties_typeProperties_userName": {
 			"value": "@{linkedService().SourceUserName}"
 		},
 		"containerUri": {
