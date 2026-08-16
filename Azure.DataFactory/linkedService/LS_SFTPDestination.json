@@ -1,0 +1,39 @@
+{
+	"name": "LS_SFTPDestination",
+	"properties": {
+		"parameters": {
+			"DestinationIPAddress": {
+				"type": "string"
+			},
+			"DestinationPortNumber": {
+				"type": "int"
+			},
+			"DestinationUserName": {
+				"type": "string"
+			},
+			"DestinationSecretName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Sftp",
+		"typeProperties": {
+			"host": "@{linkedService().DestinationIPAddress}",
+			"port": "@linkedService().DestinationPortNumber",
+			"skipHostKeyValidation": true,
+			"authenticationType": "Basic",
+			"userName": "@{linkedService().DestinationUserName}",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_KeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().DestinationSecretName",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}
