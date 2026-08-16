@@ -2,15 +2,39 @@
 	"name": "LS_BlobStorage_ServicePrincipalAuth",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"ServiceEndPoint": {
+				"type": "string"
+			},
+			"TenantID": {
+				"type": "string"
+			},
+			"ServicePrincipalID": {
+				"type": "string"
+			},
+			"ServicePrincipalKey": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"serviceEndpoint": "https://abdulportfolio.blob.core.windows.net/",
-			"tenant": "e82495f4-8e45-4d86-8bac-48dfb232a86e",
-			"servicePrincipalId": "t",
+			"serviceEndpoint": "@{linkedService().ServiceEndPoint}",
+			"tenant": "@{linkedService().TenantID}",
+			"servicePrincipalId": "@{linkedService().ServicePrincipalID}",
 			"servicePrincipalCredentialType": "ServicePrincipalKey",
-			"accountKind": "StorageV2",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQENDRTI1RTM2LTkxMUMtNEMzMC1BQUVBLUQ3M0YwMUMyRENEQl8zNzI0MTQwNS0xYWFiLTRmZGItOWRlNS1iYzJiZTUwNjBmNjgiDQp9"
+			"servicePrincipalCredential": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_KeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().ServicePrincipalKey",
+					"type": "Expression"
+				}
+			},
+			"accountKind": "BlobStorage"
 		}
 	}
 }
