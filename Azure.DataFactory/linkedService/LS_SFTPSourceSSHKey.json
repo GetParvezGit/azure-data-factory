@@ -1,6 +1,5 @@
 {
 	"name": "LS_SFTPSourceSSHKey",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"parameters": {
 			"SourceIPAddress": {
@@ -10,12 +9,6 @@
 				"type": "int"
 			},
 			"SourceUserName": {
-				"type": "string"
-			},
-			"SourceFolder": {
-				"type": "string"
-			},
-			"SourceFileNamePattern": {
 				"type": "string"
 			},
 			"SourceSSHKey": {
@@ -56,5 +49,6 @@
 				}
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
