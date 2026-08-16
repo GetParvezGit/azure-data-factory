@@ -1,0 +1,63 @@
+{
+	"name": "DS_SftpSourceSSHKey",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SFTPSourceSSHKey",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"SourceIPAddress": {
+					"value": "@dataset().SourceIPAddress",
+					"type": "Expression"
+				},
+				"SourcePortNumber": {
+					"value": "@dataset().SourcePortNumber",
+					"type": "Expression"
+				},
+				"SourceUserName": {
+					"value": "@dataset().SourceUserName",
+					"type": "Expression"
+				},
+				"SourceSSHKey": {
+					"value": "@dataset().SourceSSHKey",
+					"type": "Expression"
+				},
+				"SourcePassPhrase": {
+					"value": "@dataset().SourcePassPhrase",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"SourceIPAddress": {
+				"type": "string"
+			},
+			"SourcePortNumber": {
+				"type": "int"
+			},
+			"SourceUserName": {
+				"type": "string"
+			},
+			"SourceFolder": {
+				"type": "string"
+			},
+			"SourceSSHKey": {
+				"type": "string"
+			},
+			"SourcePassPhrase": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"folderPath": {
+					"value": "@dataset().SourceFolder",
+					"type": "Expression"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

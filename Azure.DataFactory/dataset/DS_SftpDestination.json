@@ -1,0 +1,56 @@
+{
+	"name": "DS_SftpDestination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SFTPDestination",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DestinationIPAddress": {
+					"value": "@dataset().DestinationIPAddress",
+					"type": "Expression"
+				},
+				"DestinationPortNumber": {
+					"value": "@dataset().DestinationPortNumber",
+					"type": "Expression"
+				},
+				"DestinationUserName": {
+					"value": "@dataset().DestinationUserName",
+					"type": "Expression"
+				},
+				"DestinationSecretName": {
+					"value": "@dataset().DestinationSecretName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"DestinationIPAddress": {
+				"type": "string"
+			},
+			"DestinationPortNumber": {
+				"type": "string"
+			},
+			"DestinationUserName": {
+				"type": "string"
+			},
+			"DestinationSecretName": {
+				"type": "string"
+			},
+			"DestinationFolder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"folderPath": {
+					"value": "@dataset().DestinationFolder",
+					"type": "Expression"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
