@@ -1,6 +1,5 @@
 {
 	"name": "LS_SFTPDestinationSSHKey",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"parameters": {
 			"DestinationIPAddress": {
@@ -13,9 +12,6 @@
 				"type": "string"
 			},
 			"DestinationFolder": {
-				"type": "string"
-			},
-			"DestinationFileNamePattern": {
 				"type": "string"
 			},
 			"DestinationSSHKey": {
@@ -56,5 +52,6 @@
 				}
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
