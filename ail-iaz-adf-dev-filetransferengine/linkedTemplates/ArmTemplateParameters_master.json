@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ail-iaz-adf-dev-filetransferengine"
+		},
+		"LS_KeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://ail-iaz-kv-dev-fte.vault.azure.net/"
+		},
+		"LS_SFTPDestination_properties_typeProperties_host": {
+			"value": "@{linkedService().DestinationIPAddress}"
+		},
+		"LS_SFTPDestination_properties_typeProperties_userName": {
+			"value": "@{linkedService().DestinationUserName}"
+		},
+		"LS_SFTPSource_properties_typeProperties_host": {
+			"value": "@{linkedService().SourceIPAddress}"
+		},
+		"LS_SFTPSource_properties_typeProperties_userName": {
+			"value": "@{linkedService().SourceUserName}"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

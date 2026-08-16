@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ail-iaz-adf-dev-filetransferengine"
+		},
+		"LS_KeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://ail-iaz-kv-dev-fte.vault.azure.net/"
+		},
+		"LS_SFTPDestination_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "@{linkedService().DestinationIPAddress}"
+		},
+		"LS_SFTPDestination_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().DestinationUserName}"
+		},
+		"LS_SFTPSource_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceIPAddress}"
+		},
+		"LS_SFTPSource_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceUserName}"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ail-iaz-adf-dev-filetransferengine_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_KeyVault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('LS_KeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"LS_SFTPDestination_properties_typeProperties_host": {
+						"value": "[parameters('LS_SFTPDestination_properties_typeProperties_host')]"
+					},
+					"LS_SFTPDestination_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SFTPDestination_properties_typeProperties_userName')]"
+					},
+					"LS_SFTPSource_properties_typeProperties_host": {
+						"value": "[parameters('LS_SFTPSource_properties_typeProperties_host')]"
+					},
+					"LS_SFTPSource_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SFTPSource_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

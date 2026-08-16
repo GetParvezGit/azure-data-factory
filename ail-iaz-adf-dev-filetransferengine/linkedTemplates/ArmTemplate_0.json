@@ -1,0 +1,137 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ail-iaz-adf-dev-filetransferengine"
+		},
+		"LS_KeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://ail-iaz-kv-dev-fte.vault.azure.net/"
+		},
+		"LS_SFTPDestination_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "@{linkedService().DestinationIPAddress}"
+		},
+		"LS_SFTPDestination_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().DestinationUserName}"
+		},
+		"LS_SFTPSource_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceIPAddress}"
+		},
+		"LS_SFTPSource_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().SourceUserName}"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_KeyVault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('LS_KeyVault_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SFTPDestination')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"DestinationIPAddress": {
+						"type": "string"
+					},
+					"DestinationPortNumber": {
+						"type": "int"
+					},
+					"DestinationUserName": {
+						"type": "string"
+					},
+					"DestinationSecretName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('LS_SFTPDestination_properties_typeProperties_host')]",
+					"port": "@linkedService().DestinationPortNumber",
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('LS_SFTPDestination_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "LS_KeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": {
+							"value": "@linkedService().DestinationSecretName",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_KeyVault')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SFTPSource')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"SourceIPAddress": {
+						"type": "string"
+					},
+					"SourcePortNumber": {
+						"type": "int"
+					},
+					"SourceUserName": {
+						"type": "string"
+					},
+					"SourceSecretName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('LS_SFTPSource_properties_typeProperties_host')]",
+					"port": "@linkedService().SourcePortNumber",
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('LS_SFTPSource_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "LS_KeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": {
+							"value": "@linkedService().SourceSecretName",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_KeyVault')]"
+			]
+		}
+	]
+}
